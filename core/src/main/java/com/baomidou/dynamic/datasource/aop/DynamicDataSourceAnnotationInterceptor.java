@@ -27,6 +27,7 @@ import org.aopalliance.intercept.MethodInvocation;
  * @author TaoYu
  * @since 1.2.0
  */
+@Slf4j  
 public class DynamicDataSourceAnnotationInterceptor implements MethodInterceptor {
 
     /**
@@ -47,6 +48,7 @@ public class DynamicDataSourceAnnotationInterceptor implements MethodInterceptor
         String dsKey = determineDatasourceKey(invocation);
         DynamicDataSourceContextHolder.push(dsKey);
         try {
+            log.info("[" + dsKey + "]" + "data source is using! =========");
             return invocation.proceed();
         } finally {
             DynamicDataSourceContextHolder.poll();
